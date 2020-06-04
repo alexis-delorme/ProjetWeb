@@ -10,10 +10,11 @@ Projet Web du groupe D - Amérique du nord
 ### Working on the code 
 
 1. Go to master-branch `git checkout master`
-2. Create a new branch `git checkout -b my-branch-name`
-3. Add some code
-4. Commit your changes `git commit -am "Added these cool features"`
-5. Push your commit `git push origin my-branch-name`
-6. Go to github and create a Pull request with your changes to master!
+2. Pull latest changes `git pull`
+3. Create a new branch `git checkout -b my-branch-name`
+4. Add some code
+5. Commit your changes `git commit -am "Added these cool features"`
+6. Push your commit `git push origin my-branch-name`
+7. Go to github and create a Pull request with your changes to master!
 
 
