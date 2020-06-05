@@ -9,10 +9,6 @@ def get_zip_info(country,continent):
         # infobox du pays
         return json.loads(z.read(country))
 
-Barb = get_zip_info('Barbados.json','north_america.zip')
-
-
-
 
 def get_name(info):
     nomPays = info.get('conventional_long_name')
@@ -122,8 +118,6 @@ def get_coords(wp_info):
             return cv_coords(str_coords)
 
 
-
-
 def save_country(conn,country,info):
     c = conn.cursor()
     sql = 'INSERT OR REPLACE INTO countries VALUES (?, ?, ?, ?, ?)'
@@ -145,4 +139,6 @@ def save_all_countries(continent):
         info = get_zip_info(country,continent)
         save_country(conn,country,info)
 
-save_all_countries('north_america.zip')
+
+# Pour stocker toutes les données
+#save_all_countries('north_america.zip')
