@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <link
+    href="https://fonts.googleapis.com/css?family=Roboto"
+    rel="stylesheet"
+    type="text/css"
+  />
+  <link href="/stylePays.css" rel="stylesheet" type="text/css" />
+  <meta charset="utf-8" />
+  <style>
+    body {
+      font-family: Roboto, sans-serif;
+    }
+    main {
+      margin: 20px;
+      padding: 10px;
+      border: 1px solid #666;
+      border-radius: 5px;
+      box-shadow: 3px 3px 3px #444;
+      background: linear-gradient(0deg, #ffa50040, orange);
+    }
+    h1 {
+      margin-top: 0;
+      color: maroon;
+      font-family: Haettenschweiler;
+      text-shadow: 1px 1px white;
+    }
+    label {
+      display: block;
+      padding-bottom: 0.5em;
+    }
+    label span {
+      display: inline-block;
+      width: 3em;
+    }
+    .label {
+      display: inline-block;
+      width: 7em;
+    }
+    .country {
+      width: 20em;
+    }
+  </style>
+  <main>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <body>
+      <div class="w3-container">
+        <h2>Amérique du Nord</h2>
+        <div class="w3-bar w3-border w3-light-grey">
+          <a href="/Welcome.html" class="w3-bar-item w3-button">Home</a>
+          <a href="/country.html" class="w3-bar-item w3-button">Recherche</a>
+          <a href="/countries.html" class="w3-bar-item w3-button w3-green"
+            >Liste pays</a
+          >
+        </div>
+      </div>
+    </body>
+  </main>
+
+  <main>
+    <title>countries.html</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <body>
+      <h1>Tous les pays</h1>
+      <p id="error_msg"></p>
+      <div id="result"></div>
+    </body>
+  </main>
+</html>
+
+<script>
+  window.onload = getCountries;
+  function getCountries(e) {
+    var xhr = new XMLHttpRequest();
+
+    // requête au serveur
+    xhr.open("GET", "/service/countries", true);
+
+    // fonction callback
+    xhr.onload = function () {
+      // récupération des informations au format json
+      if (this.status == 200) {
+        var data = JSON.parse(this.responseText);
+        // window.console.log(data);
+        window.result.innerHTML = data
+          //.filter((name) => name[0] == "A")
+          //.filter(function (name) {
+          //  return name[0] == "B";
+          //})
+          //.filter((name) => filterA(name, "B"))
+          .map(
+            (name) =>
+              '<h1><a href="/country.html?country=' +
+              name +
+              '">' +
+              name +
+              "</a></h1>"
+          )
+          .join("");
+      }
+      // affichage d'un message d'erreur
+      else {
+        window.country_data.style.display = "none";
+        window.error_msg.innerHTML = this.statusText;
+      }
+    };
+    xhr.send();
+  }
+
+  function filterA(name, letter) {
+    return name[0] == letter;
+  }
+</script>

@@ -22,21 +22,20 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
         # on récupère les paramètres
         self.init_params()
 
-        # le chemin d'accès commence par /time
-        if self.path.startswith('/time'):
-            self.send_time()
-    
-        # le chemin d'accès commence par /countries
-        elif self.path.startswith('/countries'):
-            self.send_countries()
-
-        # le chemin d'accès commence par /country et se poursuit par un nom de pays
-        elif self.path_info[0] == 'country' and len(self.path_info) > 1:
-            self.send_country(self.path_info[1])
+        if self.path == '/':
+            self.path = self.static_dir + '/Welcome.html'
+            print(self.path_info)
+            return http.server.SimpleHTTPRequestHandler.do_GET(self)
+        
         
         # le chemin d'accès commence par /service/country/...
-        elif self.path_info[0] == 'service' and self.path_info[1] == 'country' and len(self.path_info) > 2:
-            self.send_json_country(self.path_info[2])
+        elif self.path_info[0] == 'service':
+            if self.path_info[1] == 'country' and len(self.path_info) > 2:
+                self.send_json_country(self.path_info[2])
+            # le chemin d'accès commence par /countries
+            elif self.path_info[1] == 'countries':
+                self.send_countries()
+            
 
         # ou pas...
         else:
@@ -90,6 +89,8 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
         print('params =', self.params)
 
 
+
+
     #
     # On envoie un document avec l'heure
     #
@@ -111,6 +112,11 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
         # on envoie
         self.send(body,headers)
 
+    #def send_welcome(self):
+    #    self.path = '/welcome.html'
+    #    SimpleHTTPRequestHandler.do_GET
+    #    self.send()
+
     #
     # On renvoie la liste des pays
     #
@@ -121,49 +127,16 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
         
         # récupération de la liste des pays dans la base
         c.execute("SELECT name FROM countries")
-        r = c.fetchall()
+        l = c.fetchall()
+        data=[]
+        for r in l:
+            data.append(r['name'])
+        txt = json.dumps(data,indent=4)
 
-        # construction de la réponse
-        txt = 'List of all {} countries :\n'.format(len(r))
-        n = 0
-        for a in r:
-            n += 1
-            txt = txt + '[{}] - {}\n'.format(n,a[0])
-        
         # envoi de la réponse
-        headers = [('Content-Type','text/plain;charset=utf-8')]
+        headers = [('Content-Type','application/json')]
         self.send(txt,headers)
 
-    #
-    # On renvoie les informations d'un pays
-    #§
-    def send_country(self,country):
-
-        # on récupère le pays depuis la base de données
-        r = self.db_get_country(country)
-
-        # on n'a pas trouvé le pays demandé
-        if r == None:
-            self.send_error(404,'Country not found')
-
-        # on génère un document au format html
-        else:
-            body = '<!DOCTYPE html>\n<meta charset="utf-8">\n'
-            body += '<title>{}</title>'.format(country)
-            body += '<link rel="stylesheet" href="/TD2-s8.css">'
-            body += '<main>'
-            body += '<h1>{}</h1>'.format(r['name'])
-            body += '<ul>'
-            #body += '<li>{}: {}</li>'.format('Continent',r['continent'].capitalize())
-            body += '<li>{}: {}</li>'.format('Capital',r['capital'])
-            body += '<li>{}: {:.3f}</li>'.format('Latitude',r['latitude'])
-            body += '<li>{}: {:.3f}</li>'.format('Longitude',r['longitude'])
-            body += '</ul>'
-            body += '</main>'
-
-        # on envoie la réponse
-        headers = [('Content-Type','text/html;charset=utf-8')]
-        self.send(body,headers)
 
     #
     # On renvoie les informations d'un pays au format json
@@ -190,7 +163,7 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
     def db_get_country(self,country):
         # préparation de la requête SQL
         c = conn.cursor()
-        sql = 'SELECT * from countries WHERE wp LIKE ?'
+        sql = 'SELECT * from countries WHERE name LIKE ?'       ## Avec LIKE on affiche le pays le plus proche de l'entrée
 
         # récupération de l'information (ou pas)
         c.execute(sql,('%' + country + '%',))

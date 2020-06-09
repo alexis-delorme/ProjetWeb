@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<title>TD3-s6.html</title>
+<title>country.html</title>
 <link
   href="https://fonts.googleapis.com/css?family=Roboto"
   rel="stylesheet"
   type="text/css"
 />
+<link href="/stylePays.css" rel="stylesheet" type="text/css" />
 <meta charset="utf-8" />
 <style>
   body {
@@ -37,9 +38,25 @@
     width: 7em;
   }
 </style>
+<main>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+  <body>
+    <div class="w3-container">
+      <h2>Amérique du Nord</h2>
+      <div class="w3-bar w3-border w3-light-grey">
+        <a href="/Welcome.html" class="w3-bar-item w3-button">Home</a>
+        <a href="/country.html" class="w3-bar-item w3-button w3-green"
+          >Recherche</a
+        >
+        <a href="/countries.html" class="w3-bar-item w3-button">Liste pays</a>
+      </div>
+    </div>
+  </body>
+</main>
 
 <main>
-  <h1>Pays du monde</h1>
+  <h1>Pays d'Amérique du Nord</h1>
 
   <div>
     <label><span>Pays :</span><input id="pays" name="pays" /></label>
@@ -47,10 +64,10 @@
   </div>
   <div id="country_data">
     <h1 id="country_name"></h1>
-    <div>
+    <!--<div>
       <span class="label">Continent:</span
       ><span class="value" id="continent"></span>
-    </div>
+    </div>-->
     <div>
       <span class="label">Capital:</span
       ><span class="value" id="capital"></span>
@@ -71,14 +88,26 @@
 </main>
 
 <script>
-  document.getElementById("bouton").addEventListener("click", envoiformulaire);
+  document
+    .getElementById("bouton")
+    .addEventListener("click", () => buttonclicked(window.pays.value));
+  window.onload = loadCountry;
   window.country_data.style.display = "none";
-
-  function envoiformulaire(e) {
+  function loadCountry() {
+    var params = new URLSearchParams(window.location.search);
+    if (params.get("country")) {
+      envoiformulaire(params.get("country"));
+    }
+  }
+  function buttonclicked(ps) {
+    window.location.href = "/country.html?country=" + ps;
+    envoiformulaire(ps);
+  }
+  function envoiformulaire(ps) {
     var xhr = new XMLHttpRequest();
 
     // on récupère le nom du pays
-    var ps = window.pays.value;
+    //var ps = window.pays.value;
 
     // requête au serveur
     xhr.open("GET", "/service/country/" + ps, true);
@@ -91,7 +120,7 @@
         window.error_msg.innerHTML = "";
         window.country_data.style.display = "block";
         window.country_name.textContent = data.name;
-        window.continent.textContent = data.continent;
+        //window.continent.textContent = data.continent;
         window.capital.textContent = data.capital;
         window.latitude.textContent = data.latitude.toFixed(3);
         window.longitude.textContent = data.longitude.toFixed(3);
