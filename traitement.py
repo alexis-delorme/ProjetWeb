@@ -2,6 +2,7 @@ from zipfile import ZipFile
 import json
 import re
 import sqlite3
+import os
 
 
 def get_zip_info(country,continent):
@@ -117,18 +118,33 @@ def get_coords(wp_info):
         if str_coords[0:1] in '0123456789':
             return cv_coords(str_coords)
 
+def get_flag(nom):
+    nomLC = nom.lower()
+    lenNom = len(nomLC)
+    dirs = os.listdir('client/flags')
+    for file in dirs:
+        for i in range(lenNom):
+            if file[i:lenNom] == nomLC:
+                return file
+            else:
+                break
+
+
+
+
 
 def save_country(conn,country,info):
     c = conn.cursor()
-    sql = 'INSERT OR REPLACE INTO countries VALUES (?, ?, ?, ?, ?)'
+    sql = 'INSERT OR REPLACE INTO countries VALUES (?, ?, ?, ?, ?, ?)'
     # On enlève '.json' dans le string country
     countryNoJSON = re.sub('\.json$', '', country)
     print(countryNoJSON)
     name = get_name(info)
     capital = get_capitale(info)
     coords = get_coords(info)
+    flag = get_flag(countryNoJSON)
 
-    c.execute(sql,(countryNoJSON,name,capital,coords['lat'],coords['lon']))
+    c.execute(sql,(countryNoJSON,name,capital,coords['lat'],coords['lon'], flag))
     conn.commit()
 
 def save_all_countries(continent):
@@ -142,3 +158,7 @@ def save_all_countries(continent):
 
 # Pour stocker toutes les données
 #save_all_countries('north_america.zip')
+
+
+
+#print(get_flag('Barbados'))
