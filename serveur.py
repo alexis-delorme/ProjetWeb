@@ -27,7 +27,6 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
             print(self.path_info)
             return http.server.SimpleHTTPRequestHandler.do_GET(self)
         
-        
         # le chemin d'accès commence par /service/country/...
         elif self.path_info[0] == 'service':
             if self.path_info[1] == 'country' and len(self.path_info) > 2:
