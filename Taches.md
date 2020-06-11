@@ -1,7 +1,6 @@
 # Taches à réaliser (si l'on veut)
 ## Mettez vos nom à coté de la tache que vous étes en train de réaliser
-* Affichage de drapeau  [Alexis]
-* Carte avec capitales
+* Carte avec capitales [Alexis]
     * Une page avec seule la carte et les capitales affichées
 * Différents langues pour le site (anglais, suédois...)
 * Jeu des drapeaux --> choisir le bon drapeau entre 3 autres pour un pays donné
