@@ -1,61 +1,35 @@
 <!DOCTYPE html>
 <html>
-  <title>styleWelcome.css</title>
-  <link
-    href="https://fonts.googleapis.com/css?family=Roboto"
-    rel="stylesheet"
-    type="text/css"
-  />
+
+<head>
+  <title>Welcome!</title>
   <link href="/stylePays.css" rel="stylesheet" type="text/css" />
-  <meta charset="utf-8" />
-  <style>
-    body {
-      font-family: Roboto, sans-serif;
-    }
-    main {
-      margin: 20px;
-      padding: 10px;
-      border: 1px solid #666;
-      border-radius: 5px;
-      box-shadow: 3px 3px 3px #444;
-      background: linear-gradient(0deg, #ffa50040, orange);
-    }
-    h1 {
-      margin-top: 0;
-      color: maroon;
-      font-family: Haettenschweiler;
-      text-shadow: 1px 1px white;
-    }
-    label {
-      display: block;
-      padding-bottom: 0.5em;
-    }
-    label span {
-      display: inline-block;
-      width: 3em;
-    }
-    .label {
-      display: inline-block;
-      width: 7em;
-    }
-    .country {
-      width: 20em;
-    }
-  </style>
-  <main>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
-    <body>
-      <div class="w3-container">
-        <h2>Amérique du Nord</h2>
-        <div class="w3-bar w3-border w3-light-grey">
-          <a href="/Welcome.html" class="w3-bar-item w3-button w3-green"
-            >Home</a
-          >
-          <a href="/country.html" class="w3-bar-item w3-button">Recherche</a>
-          <a href="/countries.html" class="w3-bar-item w3-button">Liste pays</a>
-        </div>
-      </div>
-    </body>
-  </main>
+</head>
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<body class="noMargin">
+  <div id="container1" class="border" style="background-color:sandybrown;">
+    <div id="title" class="center">
+      <h1>Amerique du Nord</h1>
+    </div>
+    <div id="navbar">
+      <ul class="navlist">
+        <li class="navlist-item"><a class="navlist-item-a active" href="/Welcome.html">Accueil</a></li>
+        <li class="navlist-item"><a class="navlist-item-a" href="/countries.html">Liste de Pays</a></li>
+        <li class="navlist-item"><a class="navlist-item-a" href="/country.html">Recherche</a></li>
+        <li class="navlist-lang"><a class=" navlist-item-a" href="#lang">Languages</a></li>
+      </ul>
+    </div>
+  </div>
+  <div>
+    <img src="Images/FondNoirNAText.png" alt="FondNoirNAText" style="width:100%;">
+  </div>
+  <div>
+    <img src="Images/NiagaraFallsText.png" alt="NiagaraFallsText" style="width:100%;">
+  </div>
+
+</body>
+
 </html>

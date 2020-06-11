@@ -1,3 +1,7 @@
+.noMargin {
+  margin: 0;
+}
+
 .border {
   border: 1px solid red;
 }
@@ -13,6 +17,11 @@
 
 .navlist-item {
   float: left;
+}
+
+.navlist-lang {
+  float: right;
+  border-left: 2px solid steelblue;
 }
 
 .navlist-item-a {
