@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <title>country.html</title>
-<link
-  href="https://fonts.googleapis.com/css?family=Roboto"
-  rel="stylesheet"
-  type="text/css"
-/>
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css" />
 <link href="/stylePays.css" rel="stylesheet" type="text/css" />
 <meta charset="utf-8" />
 <style>
   body {
     font-family: Roboto, sans-serif;
   }
+
   main {
     margin: 20px;
     padding: 10px;
@@ -19,20 +16,24 @@
     box-shadow: 3px 3px 3px #444;
     background: linear-gradient(0deg, #ffa50040, orange);
   }
+
   h1 {
     margin-top: 0;
     color: maroon;
     font-family: Haettenschweiler;
     text-shadow: 1px 1px white;
   }
+
   label {
     display: block;
     padding-bottom: 0.5em;
   }
+
   label span {
     display: inline-block;
     width: 3em;
   }
+
   .label {
     display: inline-block;
     width: 7em;
@@ -41,14 +42,13 @@
 <main>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+
   <body>
     <div class="w3-container">
       <h2>Amérique du Nord</h2>
       <div class="w3-bar w3-border w3-light-grey">
         <a href="/Welcome.html" class="w3-bar-item w3-button">Home</a>
-        <a href="/country.html" class="w3-bar-item w3-button w3-green"
-          >Recherche</a
-        >
+        <a href="/country.html" class="w3-bar-item w3-button w3-green">Recherche</a>
         <a href="/countries.html" class="w3-bar-item w3-button">Liste pays</a>
       </div>
     </div>
@@ -69,19 +69,20 @@
       ><span class="value" id="continent"></span>
     </div>-->
     <div>
-      <span class="label">Capital:</span
-      ><span class="value" id="capital"></span>
+      <span class="label">Capital:</span><span class="value" id="capital"></span>
     </div>
     <div>
-      <span class="label">Latitude:</span
-      ><span class="value" id="latitude"></span>
+      <span class="label">Latitude:</span><span class="value" id="latitude"></span>
     </div>
     <div>
-      <span class="label">Longitude:</span
-      ><span class="value" id="longitude"></span>
+      <span class="label">Longitude:</span><span class="value" id="longitude"></span>
     </div>
     <div>
       <span class="label">Read more on:</span><a id="wp" href="">wikipedia</a>
+    </div>
+    <div>
+      <p><b>Country flag</b></p>
+      <img id="flagimg" alt="flag" style="width:auto;height:auto;">
     </div>
   </div>
   <div id="error_msg"></div>
@@ -125,6 +126,7 @@
         window.latitude.textContent = data.latitude.toFixed(3);
         window.longitude.textContent = data.longitude.toFixed(3);
         window.wp.href = "https://en.wikipedia.org/wiki/" + data.wp;
+        window.flagimg.src = "/flags/" + data.flag;
       }
       // affichage d'un message d'erreur
       else {
