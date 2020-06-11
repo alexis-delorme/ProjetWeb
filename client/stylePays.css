@@ -1,57 +1,72 @@
+.border {
+  border: 1px solid red;
+}
 
-
-
-/* fond de page */
-body {
-  background-size: 100%;
-  background-repeat: no-repeat;
-  color: white;
-  height: 100vh;
+.navlist {
+  list-style-type: none;
+  bottom: 0;
   margin: 0;
-  /* pour éviter l'ascenseur */
-  border: 1px solid transparent;
-  box-sizing: border-box;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
 }
 
-/* bandeau de titre */
-h1 {
-  color: orangered;
-  border: none;
-  box-shadow: none;
-  background-color: none;
-  border-top: none;
-  border-bottom: none;
-  margin-top: 1.33em;
-  text-shadow: 3px 3px 3px black;
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
-  margin-bottom: 1.33em;
+.navlist-item {
+  float: left;
 }
 
-/* contenu de la page */
-body > * {
-  padding-left: 10px;
-}
-
-/* polices de caractères */
-body {
-  font-family: Trebuchet MS, sans-serif;
-}
-
-/* positionnement des champs */
-label {
+.navlist-item-a {
   display: block;
+  color: white;
+  text-align: center;
+  padding: 17px;
+  text-decoration: none;
 }
-label span {
-  display: inline-block;
-  width: 5em;
-  height: 1.5em;
+
+.navlist-item-a:hover:not(.active) {
+  background-color: #111;
+}
+
+.active {
+  background-color: #4CAF50;
+}
+
+.center {
+  text-align: center;
+}
+
+.split {
+  height: 80vh;
+  width: 50%;
+  position: relative;
+  z-index: 1;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
 }
 
 a.delete:hover {
   color: red;
 }
-#map {
-  height: 400px;
-  width: 600px;
+
+
+
+label {
+  display: block;
+  padding-bottom: 0.5em;
+}
+
+label span {
+  display: inline-block;
+  width: 3em;
+}
+
+.label {
+  display: inline-block;
+  width: 7em;
 }
