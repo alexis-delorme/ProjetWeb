@@ -1,6 +1,6 @@
 window.addEventListener('DOMContentLoaded', () => initialize());
 var map;
-function initialize(latitude = 38.88333, longitude = -78, zoom = 2.5) {
+function initialize(latitude = 39.049404, longitude = -78, zoom = 2.2) {
 
 
     // Création d'une carte dans la balise div "map",
