@@ -5,9 +5,6 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<!DOCTYPE html>
-
-
 <head>
   <title>Country Search</title>
   <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
@@ -21,13 +18,10 @@
   <script src="/country.js"></script>
 </head>
 
-<meta charset="utf-8" />
-
-<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 
-<body>
-  <div id="container1" class="border" style="background-color:sandybrown;">
+<body class="noMargin border" style="background-color:sandybrown;">
+  <div id="container1">
     <div id="title" class="center">
       <h1>Amerique du Nord</h1>
     </div>
@@ -42,29 +36,26 @@
   </div>
   <div id="container2">
     <div id="info" class="split left" style="background-color: powderblue;">
-      <div id=search class="border">
+      <div id=search>
         <label>
-          <span>Pays:</span>
-          <input id="pays" name="pays" />
+          <span style="font-size:100%;font-weight:bold;margin-left:15px;">Pays :</span>
+          <input id="pays" name="pays" class="input-pays" />
         </label>
-        <label>
-          <span> </span>
-          <button id="bouton" onclick=buttonclicked()>Fiche</button>
-        </label>
+        <button id="bouton" onclick=buttonclicked() class="button1">Fiche</button>
       </div>
-      <div id="country_data" class="border" style="display:none;">
+      <div id="country_data" style="display:none;">
         <h1 id="country_name"></h1>
         <div>
-          <span class="label border">Capitale:</span><span class="value" id="capital"></span>
+          <span class="label">Capitale:</span><span class="value" id="capital"></span>
         </div>
         <div>
-          <span class="label border">Latitude:</span><span class="value" id="latitude"></span>
+          <span class="label">Latitude:</span><span class="value" id="latitude"></span>
         </div>
         <div>
-          <span class="label border">Longitude:</span><span class="value" id="longitude"></span>
+          <span class="label">Longitude:</span><span class="value" id="longitude"></span>
         </div>
         <div>
-          <span class="label border">En savoir plus : </span><a id="wp" href="">Wikipedia</a>
+          <span class="label">En savoir plus : </span><a id="wp" href="">Wikipedia</a>
         </div>
         <div>
           <p><b>Drapeau du pays</b></p>
@@ -72,7 +63,7 @@
         </div>
       </div>
     </div>
-    <div id="map" class="split right" style="background-color: rgb(175, 238, 138);">
+    <div id="map" class="split right" style="background-color: powderblue;">
       <h1>The default map goes here</h1>
 
       <div id="map_container" style="height:50%;width:100%">
@@ -85,7 +76,3 @@
   </div>
   </div>
 </body>
-
-<script>
-
-</script>
