@@ -125,16 +125,18 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
         c = conn.cursor()
         
         # récupération de la liste des pays dans la base
-        c.execute("SELECT name FROM countries")
+        c.execute("SELECT * FROM countries")
         l = c.fetchall()
         data=[]
         for r in l:
-            data.append(r['name'])
+            data.append({k:r[k] for k in r.keys()})
+            #data.append(r['name'])
         txt = json.dumps(data,indent=4)
 
         # envoi de la réponse
         headers = [('Content-Type','application/json')]
         self.send(txt,headers)
+
 
 
     #
