@@ -1,6 +1,8 @@
-window.addEventListener('DOMContentLoaded', () => initialize());
 var map;
-function initialize(latitude = 39.049404, longitude = -78, zoom = 2.2) {
+var selectedMapMarker;
+var mapMarkers = [];
+
+function initializeMap(markerEventListener, latitude = 39.049404, longitude = -78, zoom = 2.2) {
 
 
     // Création d'une carte dans la balise div "map",
@@ -12,10 +14,10 @@ function initialize(latitude = 39.049404, longitude = -78, zoom = 2.2) {
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    get_all_countries()
+    get_all_countries(markerEventListener)
 }
 
-function get_all_countries() {
+function get_all_countries(markerEventListener) {
     // objet pour l'envoi d'une requête Ajax
     var xhr = new XMLHttpRequest();
 
@@ -23,39 +25,21 @@ function get_all_countries() {
     xhr.onload = function () {
         var countries = JSON.parse(this.responseText);
         window.console.log(countries)
-        countries.forEach(country =>
-            L.marker([country.latitude, country.longitude]).addTo(map)
+        mapMarkers = countries.map(country => {
+            var marker = L.marker([country.latitude, country.longitude]);
+            marker.addTo(map)
                 .bindPopup('Lieu = ' + country.name)
-                .addEventListener('click', OnMarkerClick)
+                .addEventListener('click', e => {
+                    selectedMapMarker = e.target
+                    if (markerEventListener) {
+                        markerEventListener(e.target)
+                    }
+                })
                 .idnum = country.wp
-        )
+            return marker
+        })
     }
     xhr.open('GET', '/service/countries', true);
     xhr.send();
 }
 
-
-// Fonction appelée lors d'un clic sur un marqueur
-function OnMarkerClick(e) {
-
-    // objet pour l'envoi d'une requête Ajax
-    var xhr = new XMLHttpRequest();
-
-    // fonction appelée lorsque la réponse à la requête (description d'un lieu insolite) sera arrivée
-    xhr.onload = function () {
-
-        var countries = JSON.parse(this.responseText);
-        window.console.log(countries)
-        var capInfo = countries.find(country => country.wp === idnum).desc
-        // affichage dans la zone 'description' du nom (reprise dans le popup)
-        // et de la description récupérée par l'appel au serveur
-        point_info.innerHTML = '<b><i>' + e.target.getPopup().getContent() + '</i></b><br>' + capInfo;
-    };
-
-    // Le numéro du lieu est récupéré via la propriété personnalisée du marqueur
-    var idnum = e.target.idnum
-
-    // Envoi de la requête Ajax pour la récupération de la description du lieu de numéro idnum
-    xhr.open('GET', '/service/countries', true);
-    xhr.send();
-}
