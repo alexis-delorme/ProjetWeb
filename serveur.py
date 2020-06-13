@@ -34,6 +34,7 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
             # le chemin d'accès commence par /countries
             elif self.path_info[1] == 'countries':
                 self.send_countries()
+
             
 
         # ou pas...

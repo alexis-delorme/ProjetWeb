@@ -44,19 +44,18 @@ function OnMarkerClick(e) {
     // fonction appelée lorsque la réponse à la requête (description d'un lieu insolite) sera arrivée
     xhr.onload = function () {
 
-        // transformation des données renvoyées par le serveur
-        // responseText est du type string, data est un objet
-        var capInfo = JSON.parse(this.responseText);
-
+        var countries = JSON.parse(this.responseText);
+        window.console.log(countries)
+        var capInfo = countries.find(country => country.wp === idnum).desc
         // affichage dans la zone 'description' du nom (reprise dans le popup)
         // et de la description récupérée par l'appel au serveur
-        description.innerHTML = '<b><i>' + e.target.getPopup().getContent() + '</i></b><br>' + capInfo.desc;
+        point_info.innerHTML = '<b><i>' + e.target.getPopup().getContent() + '</i></b><br>' + capInfo;
     };
 
     // Le numéro du lieu est récupéré via la propriété personnalisée du marqueur
     var idnum = e.target.idnum
 
     // Envoi de la requête Ajax pour la récupération de la description du lieu de numéro idnum
-    xhr.open('GET', '/description/' + idnum, true);
+    xhr.open('GET', '/service/countries', true);
     xhr.send();
 }
