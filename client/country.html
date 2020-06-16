@@ -10,6 +10,8 @@
   <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
     integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
     crossorigin=""></script>
+  <script src="https://kit.fontawesome.com/a01da7384c.js" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
   <link href="/stylePays.css" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
     integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
@@ -23,7 +25,7 @@
 <body class="noMargin border" style="background-color:sandybrown;">
   <div id="container1">
     <div id="title" class="center">
-      <h1>Amerique du Nord</h1>
+      <h1><i class="fas fa-globe-americas"></i> Amerique du Nord</h1>
     </div>
     <div id="navbar">
       <ul class="navlist">
@@ -43,7 +45,7 @@
         </label>
         <button id="bouton" onclick=buttonclicked() class="button1">Fiche</button>
       </div>
-      <div id="country_data" style="display:none;">
+      <div id="country_data" style="display:none;margin-left:3%;">
         <h1 id="country_name"></h1>
         <div>
           <span class="label">Capitale:</span><span class="value" id="capital"></span>
@@ -64,10 +66,7 @@
       </div>
     </div>
     <div id="map" class="split right" style="background-color: powderblue;">
-      <h1>The default map goes here</h1>
-
-      <div id="map_container" style="height:50%;width:100%">
-
+      <div id="map_container" style="height:70%;width:100%">
       </div>
       <div id="point_info" class="border">
         <p>POI information goes here</p>

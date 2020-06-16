@@ -2,7 +2,7 @@ var map;
 var selectedMapMarker;
 var mapMarkers = [];
 
-function initializeMap(markerEventListener, latitude = 39.049404, longitude = -78, zoom = 2.2) {
+function initializeMap(markerEventListener, latitude = 39.049404, longitude = -78, zoom = 2) {
 
 
     // Création d'une carte dans la balise div "map",
