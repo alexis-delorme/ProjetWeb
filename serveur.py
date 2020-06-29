@@ -90,33 +90,6 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
 
 
 
-
-    #
-    # On envoie un document avec l'heure
-    #
-    def send_time(self):
-        
-        # on récupère l'heure
-        time = self.date_time_string()
-
-        # on génère un document au format html
-        body = '<!doctype html>' + \
-            '<meta charset="utf-8">' + \
-            '<title>l\'heure</title>' + \
-            '<div>Voici l\'heure du serveur :</div>' + \
-            '<pre>{}</pre>'.format(time)
-
-        # pour prévenir qu'il s'agit d'une ressource au format html
-        headers = [('Content-Type','text/html;charset=utf-8')]
-
-        # on envoie
-        self.send(body,headers)
-
-    #def send_welcome(self):
-    #    self.path = '/welcome.html'
-    #    SimpleHTTPRequestHandler.do_GET
-    #    self.send()
-
     #
     # On renvoie la liste des pays
     #
@@ -165,10 +138,11 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
     def db_get_country(self,country):
         # préparation de la requête SQL
         c = conn.cursor()
-        sql = 'SELECT * from countries WHERE name LIKE ?'       ## Avec LIKE on affiche le pays le plus proche de l'entrée
+        sql = 'SELECT * from countries WHERE lower(name) LIKE ? or lower(wp) LIKE ?'       ## Avec LIKE on affiche le pays le plus proche de l'entrée
 
         # récupération de l'information (ou pas)
-        c.execute(sql,('%' + country + '%',))
+        countrySearch = '%' + country.lower() + '%'
+        c.execute(sql,(countrySearch, countrySearch))
         return c.fetchone()
 
 

@@ -28,14 +28,14 @@ function get_all_countries(markerEventListener) {
         mapMarkers = countries.map(country => {
             var marker = L.marker([country.latitude, country.longitude]);
             marker.addTo(map)
-                .bindPopup('Lieu = ' + country.name)
+                .bindPopup(country.name)
                 .addEventListener('click', e => {
                     selectedMapMarker = e.target
                     if (markerEventListener) {
                         markerEventListener(e.target)
                     }
                 })
-                .idnum = country.wp
+                .idnum = country.name
             return marker
         })
     }

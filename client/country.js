@@ -20,24 +20,25 @@ function buttonclicked() {
     var ps = window.pays.value;
     window.history.replaceState(null, null, "/country.html?country=" + ps);
     getCountry(ps, data => populateFields(data, true));
+
 }
 
 function populateFields(data, triggerClick = false) {
     window.country_data.style.display = "block";
     window.country_name.textContent = data.name;
-    //window.continent.textContent = data.continent;
     window.capital.textContent = data.capital;
-    window.latitude.textContent = data.latitude.toFixed(3);
-    window.longitude.textContent = data.longitude.toFixed(3);
     window.wp.href = "https://en.wikipedia.org/wiki/" + data.wp;
     window.flagimg.src = "/flags/" + data.flag;
-    var marker = mapMarkers.find(marker => marker.idnum === data.wp)
+    var marker = mapMarkers.find(marker => marker.idnum === data.name)
     if (triggerClick) {
         window.console.log('here')
         marker.fire('click')
     }
     if (marker) {
-        point_info.innerHTML = '<b><i>' + marker.getPopup().getContent() + '</i></b><br>' + data.desc;
+        //point_info.innerHTML = '<b><i>' + 'Capital : ' + '</i></b><br>' + data.capital + '<br>' + data.latitude.toFixed(3) + '<br>' + data.longitude.toFixed(3);
+        capital1.innerHTML = '<p><b>Coordonnées de la capitale:</b></p>';
+        latitude1.innerHTML = '<span class="label">Latitude:</span>' + data.latitude.toFixed(2);
+        longitude1.innerHTML = '<span class="label">Longitude:</span>' + data.longitude.toFixed(2);
     } else {
         window.console.error("could not find marker of that country...")
     }

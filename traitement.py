@@ -157,7 +157,7 @@ def save_all_countries(continent):
 
 
 # Pour stocker toutes les données
-#save_all_countries('north_america.zip')
+save_all_countries('north_america.zip')
 
 
 
