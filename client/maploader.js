@@ -28,7 +28,7 @@ function get_all_countries(markerEventListener) {
         mapMarkers = countries.map(country => {
             var marker = L.marker([country.latitude, country.longitude]);
             marker.addTo(map)
-                .bindPopup(country.name)
+                .bindPopup(country.capital)
                 .addEventListener('click', e => {
                     selectedMapMarker = e.target
                     if (markerEventListener) {

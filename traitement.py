@@ -23,6 +23,8 @@ def get_name(info):
 def get_capitale(info):
     capitale = info.get('capital')
     capitale = capitale[capitale.index('[[') + 2 : capitale.index(']]')]
+    if get_name(info) != 'United States of America':
+        capitale = capitale.split(',')[0]
     return capitale
 
 #
@@ -147,8 +149,27 @@ def save_country(conn,country,info):
     c.execute(sql,(countryNoJSON,name,capital,coords['lat'],coords['lon'], flag))
     conn.commit()
 
+def create():
+    try:
+        c.execute("""CREATE TABLE countries
+                (wp, name, capital, latitude, longitude, flags)""")
+    except:
+        pass
+
 def save_all_countries(continent):
     conn = sqlite3.connect('pays.sqlite')
+    table ='''CREATE TABLE IF NOT EXISTS countries(
+    wp TEXT NOT NULL UNIQUE,
+    name TEXT,
+    capital TEXT,
+    latitude REAL,
+    longitude REAL,
+    flags TEXT,
+    PRIMARY KEY(wp)
+    )'''
+    cursor = conn.cursor()
+    cursor.execute(table)
+
     with ZipFile(continent,'r') as zipObj:
         listnames = zipObj.namelist()
     for country in listnames:
