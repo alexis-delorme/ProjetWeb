@@ -1,24 +1,12 @@
-# ProjetWeb
-Projet Web du groupe D - Amérique du nord
-## Managing our git
-### Preliminary steps
-1. Make sure you downloaded git
+# Projet Web - Amérique du Nord
+Groupe : Alexis Delorme, Tristan Boucansaud, Blanche de Chavagnac, Manon Ghelfi
+## Description du projet
 
-2. Go to the folder where you want to add our group's repository
-
-3. Write `git clone https://github.com/alexis-delorme/ProjetWeb.git` in terminal. This will create a local repository in the folder you chose that will be linked to the remote repository on github
-
-4. Our github remote repository is public and can be found on the following link https://github.com/alexis-delorme/ProjetWeb. Here you can find info for when people have made changes, what changes they made, make pull requests etc.
-
-### Working on the code 
-
-1. Go to master-branch `git checkout master`. 
-2. Pull latest changes `git pull`. Gets the latest version of the current(master) branch from github
-3. Create a new branch `git checkout -b my-branch-name`. Replace my-branch-name with the name of your branch. **CANNOT** have spaces in its name and make sure the branch name is **unique**. We want to work in specific branches and **not** in the default branch (master) because we dont want to change the code that other people might be working from. If conflicts still occur we can atleast track them easier and solve them in each branch seperately.
-4. You are now working in the branch you created. Add some code. If you are ever unsure which branch you are working in type `git status` in your terminal.
-5. Commit your changes with `git commit -am "description of commit"`. These commits will appear in the branch you're currently in (my-branch-name), this way you don't bother anyone else working with another feature. Commit as many times as you want in your branch. **Careful** to check your branch with `git status` if you are unsure what branch you are in.
-6. Push your commit `git push origin my-branch-name`. This pushes/saves your local commit to github and everyone else can see your changes. The part with `origin my-branch-name` is only needed for the first time you push your branch, however if you are unsure, write it out anyway.
-7. Go to our repository on github (https://github.com/alexis-delorme/ProjetWeb) and create a Pull request with your changes to master. What the pull request does is that it sends a request to merge the changes you have made in a branch (my-branch-name) into the default branch (master). The people in the group can accept the request if they like and you can then merge into the master branch. If there are no conflicts (for example when having created a new file in the repository with a unique name) you can merge with no problem.
-8. Repeat steps 1-7 for each feature, bug-fix, testing etc.
+Ce projet a pour but de créer une interface présentant les pays de la continente Amérique du Nord, leurs capitales et quelques autres informations appartenant du pays. Le projet utilise les langages Python, JavaScript, CSS, HTML et un peu de C (SQ Lite) pour créer une site web stylés et avec des fonctionnalités pratiques. L’un des éléments principales serait une carte glissante où les capitales de chaque pays seront affichés.
 
 
+### Stockage et traitement de données
+Le stockage et traitement des données se fait avec le programme traitement.py. Le programme utilise la librairie la plus utilisée dans le monde, SQ Lite, qui nous permet de stocker facilement un très grand nombre de données dans plusieurs tables. Il suffit de lancer le programme et un fichier pays.sqlite sera créer si un fichier avec un tel nom n’en existe pas déjà sinon le programme va lire et écrire sur ce fichier. Ensuite le programme va créer une table dans cette base de données, appelé « countries », et va mettre dans les colonnes les données de chaque pays depuis l’infobox de Wikipedia (qui existe dans le fichier north_america.zip). Par exemple, notre table stocke la clé du pays (wp), le nom du pays (name), la capitale du pays (capital), les coordonnées de la capitale (latitude et longitude) ainsi que le nom du fichier du drapeau correspondant dans le dossier « flags ». Une fois la base de données créé le serveur va utiliser le contenue de cette base et pourrait afficher ces données en fonction de l’action de l’utilisateur.
+
+### Lancement du serveur
+Lance le programme serveur.py. Ce programme crée une serveur avec l’URL localhost:8080 dont vous avez accès depuis votre navigateur préférée. Le programme va pouvoir, en utilisant les fonctions DO_GET, DO_HEAD et send_static, d’envoyer les informations que l’on souhaite avoir en fonction de l’URL. Par exemple, si l’URL est localhost:8080/service/country/Barbados on envoie une chaine de charactères de toutes les informations qui existe dans la base de données sur le pays Barbados, en format JSON. Les informations ne seront pas affiché dans le format JSON brut car les fichiers JavaScript (fonctionnalités et manipulation des données sous format JSON) et CSS (style des données) vont intervenir pour rendre la présentation de l’information plus élégante. En effet, l’utilisateur ne doit pas saisir une URL différente chaque fois qu’il veut afficher les informations de Barbados, il utilise plutôt les onglets, la carte glissante, la recherche etc. 
